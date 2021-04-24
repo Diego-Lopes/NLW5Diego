@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext } from "react";
 import { GetStaticProps } from "next";
 import { api } from "../src/services/api";
 import ptBR from "date-fns/locale/pt-BR";
@@ -7,6 +7,7 @@ import { convertDurationToTimeString } from "../src/utils/convertDurationToTimeS
 import styles from "./home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { PlayerContext } from "../src/contexts/PlayerConstext";
 //modelos de api
 //SPA
 //SSR
@@ -29,11 +30,11 @@ type HomeProps = {
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   //ESSE TIPO DE CHAMADA DE API É SPA
-
+  const player = useContext(PlayerContext)
   return (
     <div className={styles.homepage}>
       <section className={styles.latesEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos {player}</h2>
 
         <ul>
           {latestEpisodes.map((episode) => {
